@@ -7,7 +7,7 @@ int main(){
     gets(str);                              // get  a string form user
     
     int count= 0 ;
-    while(str[count] != '\0'){            // getting the length of string
+    while(str[count] != '\0'){              // getting the length of string
         count++;
     }
     
