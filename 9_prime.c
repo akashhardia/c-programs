@@ -6,8 +6,8 @@ int main(){
     scanf("%d",&number);
     
     int prime = 1;
-    for(int i=number/2;i>1;i--){
-        if(number/i == 0){
+    for(int i=number/2; i>1; i--){
+        if(number%i == 0){
             prime = 0;
             printf("not a prime number");
             break;
