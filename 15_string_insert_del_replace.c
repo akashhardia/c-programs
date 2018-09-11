@@ -91,5 +91,24 @@ void del(){
 }
 
 void replace(){
+    char mainstr[1000], substr;
+    int pos;
+    printf("enter main string: ");
+    scanf("%d\n");
+    gets(mainstr);
+    printf("starting with zero, enter the position: ");
+    scanf("%d",&pos);
+    printf("enter the character: ");
+    scanf("%d\n");
+    scanf("%c",&substr);
     
+    int count=0;
+    while(mainstr[count]!='\0'){
+        count++;
+    }
+    count--;
+    
+    mainstr[pos++] = substr;
+    mainstr[pos] = '\0';
+    printf("The new string is: %s", mainstr);
 }
