@@ -1,9 +1,9 @@
 #include<stdio.h>
 
-int* bubble_sort(int[],int);
+void bubble_sort(int[],int);
 
 int main(){
-    int length, arr[100],*p;
+    int length, arr[100];
     printf("enter number of elements in an array: ");
     scanf("%d",&length);
     length--;
@@ -13,27 +13,37 @@ int main(){
     }
     
     printf("sorting in ascending order.\n");
-    p = bubble_sort(arr, length);
+    bubble_sort(arr, length);
     
     for(int i=0;i<=length; i++){
-        printf("%d",*(p+i));                // value at
+        printf("%d",arr[i]);                
     }
 
     return 0;
 }
 
-int * bubble_sort(int arr[], int length){
+void bubble_sort(int arr[], int length){
     int temp,i=0;
-    while(i<=length){                       // we don't use value of i anywhere, it is just for incrementing passes
-            for(int j=1;j<=length;j++){
-                if(arr[j]<arr[j-1]){        // comparing j with previous element
-                    temp = arr[j-1];
-                    arr[j-1] = arr[j];
-                    arr[j] = temp;
-                }
+    for(int i = 0;i<length;i++){        // we dont use i anywhere, it is just for looping n times
+        
+        for(int j = 0;j<length;j++){
+            
+            if(arr[j]>arr[j+1]){
+                arr[j]   = arr[j] + arr[j+1];
+                arr[j+1] = arr[j] - arr[j+1];
+                arr[j]   = arr[j] - arr[j+1];
             }
-        i++;
+        }
     }
-    
-    return arr;
 }
+
+// Blind sort/ Bubble
+
+// checking adjacent elements n-1 times -> n times
+// 4    2    1    3    5
+// j   j+1
+//      j   j+1
+//           j   j+1 
+//                j   j+1       5-1 comparisons = 4 comparisons b/w (j & j+1)
+
+//                              means total 4*5 = 20 comparisons to sort

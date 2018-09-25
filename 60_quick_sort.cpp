@@ -2,34 +2,33 @@
 // divide and conquer
 
 #include<stdio.h>
-#include<stdlib.h>                          // exit()
 
-int partition(int arr[100], int low, int high){
-    int pivot,i,j;
-    pivot = arr[low];
-    i=low;
+using namespace std;                        // only c++
+
+int partition(int arr[100], int pivot, int high){   // setting first index as pivot
+    int i,j;                                          
+    i=pivot;                          
     j=high;
-    while(i<=j){
-        while(arr[i]<=pivot)
+    
+    while(i<j){     // indexes
+        while(arr[i]<=arr[pivot])             
             i++;
-        while(arr[j]>=pivot)
-            j++;
-        if(i<=j){
-            int temp = arr[i];
+        while(arr[j]>arr[pivot])
+            j--;
+        if(i<j){                        
+            int temp = arr[i];                      // swap i and j elements
             arr[i] = arr[j];
             arr[j] = temp;
         }
     }
-    int temp = arr[low];
-            arr[low] = arr[j];
-            arr[j] = temp;
+    int temp = arr[pivot];                          // swap j and pivot elements
+    arr[pivot] = arr[j];
+    arr[j] = temp;
     return j;
 }
-    
-    
 
 
-int Quick(int arr[100], int low, int high){
+void Quick(int arr[100], int low, int high){
     int m;
     if(low<high){
         m = partition(arr,low,high);
@@ -38,27 +37,38 @@ int Quick(int arr[100], int low, int high){
     }
 }
 
-using namespace std;                        // only c++
-
 int main(){
     int size, arr[100];
-    printf("enter no of elements in arrays:");    scanf("%d",&size); size--;
+    printf("enter no of elements in arrays:");   
+    scanf("%d",&size);          
     
-    printf("enter elements: \n");
-    for(int i=0;i<=size;i++){
-        scanf("%d ", &arr[i]);
+    printf("enter elements in array: \n");
+    
+    for(int i=0; i<size;i++){
+        scanf("%d",&arr[i]);                        // input
     }
     
-    Quick(arr,0,size);
+    Quick(arr,0,size-1);
     
-    for(int i=0;i<=size;i++){
-        printf("%d ", arr[i]);
+    for(int i=0;i<size;i++){
+        printf("%d ", arr[i]);                      // print
     }
     
     return 0;
 }
     
-//  1 2 3 4 5
-//  6 7 8 9 0
-//sum:
-//  7 9 11 13 5
+//  4   5   2   3   1
+
+
+// 1st item as pivot
+
+// step1: set i and j           (if i<=pivot, incre i      if j>pivot, decre j)
+// step2: i<j index     swap i and j element
+// step3: j>i  index     swap j and pivot element
+
+
+//O(nlogn)      average case
+//O(n^2)        worst
+
+
+// it sorts whole array by -  every time pivot(1st item) is placed at its correct position and array is broken into two parts

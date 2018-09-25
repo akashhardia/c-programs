@@ -8,16 +8,15 @@ int main(){
     int length, arr[100],*p;
     printf("enter number of elements in an array: ");
     scanf("%d",&length);
-    length--;
     
-    for(int i=0;i<=length; i++){
+    for(int i=0;i<length; i++){
         scanf("%d",&arr[i]);
     }
     
     printf("sorting in ascending order.\n");
     p = selection_sort(arr, length);
     
-    for(int i=0;i<=length; i++){
+    for(int i=0;i<length; i++){
         printf("%d",*(p+i));                // value at
     }
 
@@ -25,20 +24,53 @@ int main(){
 }
 
 int* selection_sort(int arr[], int length){         // returning int *
-    int smallest,temp;
     
-    for(int i=0; i<=length; i++){                   // loop - smallest
-        smallest = i;
-        for(int j=i+1; j<=length;j++){              // loop - scan
+    for(int i=0; i<length-1 ; i++){
+        int smallest = i;
+        
+        for(int j = i+1; j<length ; j++){
             if(arr[j]<arr[smallest]){
-                temp = arr[j];
-                arr[j] = arr[smallest];
-                arr[smallest] = temp;
+                arr[j]          = arr[j] + arr[smallest];
+                arr[smallest]   = arr[j] - arr[smallest];
+                arr[j]          = arr[j] - arr[smallest];
             }
         }
     }
-    // for(int i=0;i<=length; i++){
-    //     printf("%d",arr[i]);
-    // }
+    
     return arr;             // function cannot return an array, we return its base address
 }
+
+
+// from one end the array gets sorted
+
+//   3    4    1    7    2
+//   s    j
+//   s         j
+//   s              j
+//   s                   j
+
+
+//   1    4    3    7    2
+//        s    j
+//        s         j
+//        s              j
+
+
+//   1    2    4    7    3
+//             s    j
+//             s         j
+
+
+//   1    2    3    7    4
+//                  s    j
+
+
+//   1    2    3    4    7      sorted
+
+
+
+
+
+// total items = 5
+//                          outer loop - 4 times            0    -  length-1
+//                          inner                           i+1  -  length
