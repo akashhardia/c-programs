@@ -2,6 +2,8 @@
 #include<stdio.h>
 
 int fact(int a){
+    if(a==0)
+        return 1;
     int res=1;
     for(int i=a;i>=1;i--){
         res=res*i;
@@ -13,25 +15,23 @@ int main(){
     int n;
     printf("enter no. of rows:");
     scanf("%d",&n);
-    n--;
     
-    for(int row=0;row<=n;row++){
-        //spaces
-        for(int col=0;col<=n-row;col++){
+    for(int row=1; row<=n; row++){
+        for(int col=1; col<=n-row; col++){
             printf(" ");
         }
-        
-        //numbers
-        for(int col=0;col<=row;col++){
-            printf("%d ",fact(row)/(fact(col)*fact(row-col)));
+        for(int col=1; col<=row; col++){
+                printf("%d ",fact(row-1)/(fact(col-1)*fact(row-1-(col-1))));
         }
         printf("\n");
     }
     return 0;
 }
 
-//     1
-//    1 1
-//   1 2 1
-//  1 3 3 1
-// 1 4 6 4 1 
+
+//    12345
+// 1      1
+// 2     1 1
+// 3    1 2 1
+// 4   1 3 3 1
+// 5  1 4 6 4 1 
